@@ -1,0 +1,8 @@
+{
+  "note": "Confirmed Bundibugyo virus disease cases. WHO Disease Outbreak News or Ministry of Health / national public health institute sitreps only. Update weekly.",
+  "countries": {
+    "COD": { "confirmed": 8728, "deaths": 4205, "asOf": "2026-10-06", "src": "WHO Disease Outbreak News DON619, 8 Oct 2026", "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON619" },
+    "KEN": { "confirmed": 1, "deaths": 1, "asOf": "2026-10-06", "src": "WHO Disease Outbreak News DON619, 8 Oct 2026", "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON619", "note": "Kenya MoH has announced further confirmed cases since 6 Oct; not yet in a WHO DON or MoH sitrep loaded here." },
+    "UGA": { "confirmed": 19, "deaths": 2, "asOf": "2026-06-18", "src": "WHO Disease Outbreak News DON608", "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON608", "note": "No new cases since 5 June 2026 at the time of that DON." }
+  }
+}

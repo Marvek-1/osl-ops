@@ -1,0 +1,251 @@
+{
+ "updated": "2026-10-22",
+ "imports": [
+  {
+   "date": "2026-10-22",
+   "before": {
+    "lines": 14185,
+    "value": 65428715
+   },
+   "after": {
+    "lines": 14234,
+    "value": 65440888
+   },
+   "files": [
+    {
+     "file": "OSL_AF_RequestMonitoring_2026-10-22_G013.xlsx",
+     "role": "Line export",
+     "scope": "2026-G013 DRC Ituri Ebola Bundibugyo · all countries",
+     "rows": 1150,
+     "fileValue": 2228795,
+     "matched": 1099,
+     "added": 46,
+     "replaced": 0,
+     "consolidated": 5,
+     "dsRows": 1156,
+     "dsValue": 2228795,
+     "result": "match",
+     "note": "5 rows in the file are recorded as split lines in the dataset (same item, same total). Kept as recorded. Uploaded as data (5).xlsx.",
+     "addedBy": [
+      {
+       "or": "NBO_SR_26-073",
+       "country": "Somalia",
+       "n": 46,
+       "value": 11323
+      }
+     ],
+     "uploadedAs": "data (5).xlsx"
+    },
+    {
+     "file": "OSL_AF_RequestMonitoring_2026-10-22_BDI.xlsx",
+     "role": "Line export",
+     "scope": "Burundi · requests from 1 Jan 2024",
+     "rows": 523,
+     "fileValue": 1805185,
+     "matched": 520,
+     "added": 3,
+     "replaced": 0,
+     "consolidated": 0,
+     "dsRows": 523,
+     "dsValue": 1805185,
+     "result": "match",
+     "note": "2 earlier lines in 0R _26-05_Burundi are not in this export; they are kept as recorded and flagged \"Not in latest export\" (excluded from totals). Uploaded as data (9).xlsx.",
+     "addedBy": [
+      {
+       "or": "OR_26-03_Burundi",
+       "country": "Burundi",
+       "n": 1,
+       "value": 175
+      },
+      {
+       "or": "0R _26-05_Burundi",
+       "country": "Burundi",
+       "n": 2,
+       "value": 975
+      }
+     ],
+     "uploadedAs": "data (9).xlsx",
+     "flagged": 2
+    },
+    {
+     "file": "OSL_AF_ShipmentMonitoring_2026-10-22_G013.xlsx",
+     "role": "Shipment summary",
+     "scope": "2026-G013 shipments",
+     "rows": 113,
+     "fileValue": 2188315,
+     "matched": 113,
+     "added": 0,
+     "replaced": 0,
+     "consolidated": 0,
+     "result": "match",
+     "note": "All 113 shipment references already held with the same weight, volume, readiness and ETA/ATA. Shipment values cover G013-tagged lines only (e.g. SHP-32861: $6,013 of $235,618 across 3 requests). Uploaded as data (6).xlsx.",
+     "uploadedAs": "data (6).xlsx"
+    },
+    {
+     "file": "OSL_AF_ShipmentMonitoring_2026-10-22_All.xlsx",
+     "role": "Shipment list (no item lines)",
+     "scope": "All sections",
+     "rows": 1729,
+     "matched": 1679,
+     "added": 0,
+     "result": "not imported",
+     "note": "1,679 references match shipments already held. 50 references have no item lines in the dataset and cannot be added without them. Uploaded as data (8).xlsx.",
+     "uploadedAs": "data (8).xlsx"
+    },
+    {
+     "file": "EBOLA_CriticalItems_2026-10-22.xlsx",
+     "role": "Essential-items summary",
+     "scope": "Filtered at source (Sr ≥ 221)",
+     "rows": 17,
+     "result": "not imported",
+     "note": "Partial summary. The dashboard derives essential-item totals from the lines. Uploaded as data (7).xlsx.",
+     "uploadedAs": "data (7).xlsx"
+    }
+   ],
+   "fills": [
+    {
+     "field": "ATA",
+     "n": 50
+    },
+    {
+     "field": "Readiness date",
+     "n": 4
+    },
+    {
+     "field": "AWB / BOL recorded as 0 (as recorded, flagged)",
+     "n": 84
+    },
+    {
+     "field": "ETA2 (as recorded, flagged, not used in calculations)",
+     "n": 673
+    },
+    {
+     "field": "Last Readiness Date recorded as 31 Dec 1899 (as recorded, flagged)",
+     "n": 13
+    }
+   ]
+  }
+ ],
+ "issues": [
+  {
+   "date": "2026-10-22",
+   "file": "OSL_AF_RequestMonitoring_2026-10-22_G013.xlsx",
+   "field": "ETA2",
+   "v": "date on arrived / received lines",
+   "why": "Estimated arrival recorded on 624 lines already Arrived or Received; equal to ATA on 574. Loaded as recorded and flagged.",
+   "n": 675
+  },
+  {
+   "date": "2026-10-22",
+   "file": "OSL_AF_RequestMonitoring_2026-10-22_G013.xlsx",
+   "field": "AWB / BOL",
+   "v": "0",
+   "why": "Transport document number recorded as 0. Loaded as recorded and flagged.",
+   "n": 85
+  },
+  {
+   "date": "2026-10-22",
+   "file": "OSL_AF_ShipmentMonitoring_2026-10-22_G013.xlsx",
+   "field": "Last Readiness Date",
+   "v": "1",
+   "why": "Serial value 1 (31 Dec 1899) recorded as a date on 13 DKR shipments. Loaded as recorded and flagged.",
+   "n": 13,
+   "refs": "DKR_SR_26-056, -057, -059, -060, -061, -063, -066, -069, -071, -072, -073, -074, -082"
+  },
+  {
+   "date": "2026-10-22",
+   "file": "OSL_AF_ShipmentMonitoring_2026-10-22_G013.xlsx",
+   "field": "Volume (Cbm)",
+   "v": "0",
+   "why": "Volume recorded as 0 on shipments with weight recorded.",
+   "n": 3,
+   "refs": "SHP-41670, SHP-41837, SHP-42103"
+  },
+  {
+   "date": "2026-10-22",
+   "file": "OSL_AF_ShipmentMonitoring_2026-10-22_All.xlsx",
+   "field": "Transporter (3PL)",
+   "v": "0",
+   "why": "Transporter recorded as 0.",
+   "n": 137
+  },
+  {
+   "date": "2026-10-22",
+   "file": "OSL_AF_ShipmentMonitoring_2026-10-22_All.xlsx",
+   "field": "AWB / BOL",
+   "v": "0",
+   "why": "Transport document number recorded as 0.",
+   "n": 759
+  },
+  {
+   "date": "2026-10-22",
+   "file": "OSL_AF_ShipmentMonitoring_2026-10-22_All.xlsx",
+   "field": "Destination Country",
+   "v": "(empty)",
+   "why": "Shipment recorded without destination country.",
+   "n": 892
+  },
+  {
+   "date": "2026-10-22",
+   "file": "EBOLA_CriticalItems_2026-10-22.xlsx",
+   "field": "Applied filter",
+   "v": "Sr ≥ 221",
+   "why": "Summary filtered at source; totals cover part of the scope only.",
+   "n": 17
+  }
+ ],
+ "reference": [
+  {
+   "date": "2026-10-22",
+   "source": "Power BI · OSL monitoring · At A Glance (OSL_AF, data updated 22 Oct 2026 6:37 PM)",
+   "filters": "Request date 1 Jan 2024 – 31 Dec 2026 · all countries, emergencies, origins, shipping status",
+   "figures": [
+    [
+     "Request lines",
+     "14,626",
+     "14,232"
+    ],
+    [
+     "Total value (USD)",
+     "$71.24M",
+     "$65.44M"
+    ],
+    [
+     "Delivered (USD)",
+     "$47.62M",
+     ""
+    ],
+    [
+     "To be delivered (USD)",
+     "$23.60M",
+     ""
+    ],
+    [
+     "Shipping refs",
+     "1,982",
+     ""
+    ],
+    [
+     "Order requests",
+     "1,187",
+     ""
+    ],
+    [
+     "OPR requests",
+     "1,901",
+     ""
+    ],
+    [
+     "Countries",
+     "54",
+     ""
+    ],
+    [
+     "Emergency events",
+     "51",
+     ""
+    ]
+   ]
+  }
+ ]
+}

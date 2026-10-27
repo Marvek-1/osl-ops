@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#F3F5F7;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#14212E} a{color:#0071B8} a:hover{color:#00205B}</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column">
+  <header style="background:#00205B;color:#fff;padding:14px 24px;display:flex;align-items:center;gap:14px">
+    <div style="width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:none"><img src="assets/who-afro.png" alt="WHO AFRO" style="width:30px;height:30px;object-fit:contain"></div>
+    <div style="display:flex;flex-direction:column;gap:2px;min-width:0"><strong style="font-size:16px;font-weight:600">Data schema · Ebola Preparedness Supply Chain</strong><span style="font-size:12px;color:#C9D4E6">Sources, fields and mapping into the dashboard · version {{ ver }}</span></div>
+    <a href="Ebola Order Tracker v2.dc.html" style="margin-left:auto;color:#fff;font-size:12px;border:1px solid #6F86B3;border-radius:6px;padding:5px 10px;text-decoration:none;white-space:nowrap">← Dashboard</a>
+  </header>
+  <main style="max-width:1280px;width:100%;box-sizing:border-box;margin:0 auto;padding:20px 24px 40px;display:flex;flex-direction:column;gap:18px">
+    <section style="display:flex;flex-direction:column;gap:10px">
+      <h2 style="margin:0;font-size:20px;font-weight:600">Source registry</h2>
+      <span style="font-size:13px;color:#536271;max-width:900px;text-wrap:pretty">Every file loaded into the dashboard comes from one of these exports and keeps its export name and date in the file name.</span>
+      <sc-for list="{{ registry }}" as="r" hint-placeholder-count="3">
+        <div style="background:#fff;border:1px solid #DDE3E9;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0">
+          <div style="display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline"><span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#0071B8">{{ r.ds }}</span><strong style="font-size:14px">{{ r.sys }}</strong><span style="font-size:12px;color:#536271">{{ r.owner }}</span><sc-if value="{{ r.link }}" hint-placeholder-val="{{ true }}"><a href="{{ r.link }}" target="_blank" rel="noopener" style="font-size:12px">Open source (WHO sign-in) →</a></sc-if></div>
+          <div style="overflow-x:auto;border:1px solid #DDE3E9;border-right:0">
+            <div style="display:grid;grid-template-columns:max-content max-content max-content minmax(240px,1fr);width:max-content;min-width:100%">
+              <div style="grid-column:1 / -1;display:grid;grid-template-columns:subgrid;background:#0071B8;font-size:10px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:#fff"><span style="padding:4px 7px;border-right:1px solid #3D8FC6">Export</span><span style="padding:4px 7px;border-right:1px solid #3D8FC6">File name</span><span style="padding:4px 7px;border-right:1px solid #3D8FC6">Model table</span><span style="padding:4px 7px;border-right:1px solid #3D8FC6">Use in dashboard</span></div>
+              <sc-for list="{{ r.exports }}" as="e" hint-placeholder-count="3">
+                <div style="grid-column:1 / -1;display:grid;grid-template-columns:subgrid;border-top:1px solid #DDE3E9;font-size:11px"><span style="padding:3px 7px;border-right:1px solid #DDE3E9;white-space:nowrap;font-weight:600">{{ e.name }}</span><span style="padding:3px 7px;border-right:1px solid #DDE3E9;white-space:nowrap;font-family:'IBM Plex Mono',monospace">{{ e.file }}</span><span style="padding:3px 7px;border-right:1px solid #DDE3E9;white-space:nowrap;color:#536271">{{ e.table }}</span><span style="padding:3px 7px;border-right:1px solid #DDE3E9;text-wrap:pretty">{{ e.use }}</span></div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="display:flex;flex-direction:column;gap:10px">
+      <h2 style="margin:0;font-size:20px;font-weight:600">Sources</h2>
+      <span style="font-size:13px;color:#536271;max-width:900px;text-wrap:pretty">The dashboard reads four sources. Column names below are as they appear in each source. Values are stored as recorded; only the transformations listed in “Rule” are applied.</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:12px">
+        <sc-for list="{{ sources }}" as="s" hint-placeholder-count="4">
+          <div style="background:#fff;border:1px solid #DDE3E9;border-top:4px solid #0071B8;border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#0071B8">{{ s.n }}</span>
+            <strong style="font-size:14px">{{ s.name }}</strong>
+            <span style="font-size:12px;color:#3F4B57;line-height:1.45;text-wrap:pretty">{{ s.what }}</span>
+            <span style="font-size:11px;color:#536271">Stored in <span style="font-family:'IBM Plex Mono',monospace;color:#14212E">{{ s.file }}</span></span>
+            <span style="font-size:11px;color:#536271">Update: {{ s.cadence }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background:#fff;border:1px solid #DDE3E9;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+        <h3 style="margin:0;padding-bottom:8px;border-bottom:2px solid #0071B8;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0071B8">Canonical source · Power BI</h3>
+        <div style="display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 16px;font-size:12px">
+          <sc-for list="{{ pbi }}" as="p" hint-placeholder-count="7"><span style="color:#536271;white-space:nowrap">{{ p.k }}</span><span style="color:#14212E">{{ p.v }}</span></sc-for>
+        </div>
+        <a href="{{ pbiUrl }}" target="_blank" rel="noopener" style="font-size:12px;align-self:flex-start">Open the OSL monitoring report (WHO sign-in) →</a>
+      </div>
+    </section>
+
+    <sc-for list="{{ maps }}" as="m" hint-placeholder-count="3">
+      <section style="background:#fff;border:1px solid #DDE3E9;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0">
+        <h3 style="margin:0;padding-bottom:8px;border-bottom:2px solid #0071B8;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0071B8">{{ m.title }}</h3>
+        <span style="font-size:12px;color:#3F4B57;line-height:1.45;text-wrap:pretty">{{ m.sub }}</span>
+        <div style="overflow-x:auto;border:1px solid #DDE3E9;border-right:0">
+          <div style="display:grid;grid-template-columns:max-content max-content max-content max-content minmax(260px,1fr);width:max-content;min-width:100%">
+            <div style="grid-column:1 / -1;display:grid;grid-template-columns:subgrid;background:#0071B8;font-size:10px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:#fff"><span style="padding:4px 7px;border-right:1px solid #3D8FC6;text-align:right">SN</span><span style="padding:4px 7px;border-right:1px solid #3D8FC6">Source column</span><span style="padding:4px 7px;border-right:1px solid #3D8FC6">Field</span><span style="padding:4px 7px;border-right:1px solid #3D8FC6">Type</span><span style="padding:4px 7px;border-right:1px solid #3D8FC6">Rule</span></div>
+            <sc-for list="{{ m.rows }}" as="r" hint-placeholder-count="8">
+              <div style="grid-column:1 / -1;display:grid;grid-template-columns:subgrid;border-top:1px solid #DDE3E9;font-size:11px"><span style="padding:3px 7px;border-right:1px solid #DDE3E9;text-align:right;color:#536271">{{ r.sn }}</span><span style="padding:3px 7px;border-right:1px solid #DDE3E9;white-space:nowrap">{{ r.col }}</span><span style="padding:3px 7px;border-right:1px solid #DDE3E9;white-space:nowrap;font-family:'IBM Plex Mono',monospace;font-weight:500;color:{{ r.fc }}">{{ r.f }}</span><span style="padding:3px 7px;border-right:1px solid #DDE3E9;white-space:nowrap;color:#536271">{{ r.t }}</span><span style="padding:3px 7px;border-right:1px solid #DDE3E9;text-wrap:pretty">{{ r.rule }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-for>
+
+    <section style="background:#fff;border:1px solid #DDE3E9;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0">
+      <h3 style="margin:0;padding-bottom:8px;border-bottom:2px solid #0071B8;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0071B8">WHO Shipping Status → dashboard stage</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        <sc-for list="{{ stages }}" as="s" hint-placeholder-count="12"><span style="font-size:11px;border:1px solid #DDE3E9;border-radius:6px;padding:3px 8px;background:#F7F9FA;white-space:nowrap"><span style="font-family:'IBM Plex Mono',monospace">{{ s.raw }}</span> → <strong>{{ s.st }}</strong></span></sc-for>
+      </div>
+    </section>
+
+    <section style="display:flex;flex-direction:column;gap:10px">
+      <h2 style="margin:0;font-size:20px;font-weight:600">Tables for Azure Database for PostgreSQL</h2>
+      <span style="font-size:13px;color:#536271;max-width:900px;text-wrap:pretty">Same fields as the JSON files, one table per entity, for the move to afro-server. Field names match the dashboard so the JSON files can be loaded unchanged.</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;align-items:start">
+        <sc-for list="{{ tables }}" as="tb" hint-placeholder-count="6">
+          <div style="background:#fff;border:1px solid #DDE3E9;border-radius:8px;overflow:hidden;display:flex;flex-direction:column">
+            <div style="background:#14212E;color:#fff;padding:7px 10px;display:flex;justify-content:space-between;gap:8px;align-items:baseline"><strong style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500">{{ tb.name }}</strong><span style="font-size:10px;color:#C9D4E6">{{ tb.from }}</span></div>
+            <sc-for list="{{ tb.cols }}" as="c" hint-placeholder-count="6"><div style="display:grid;grid-template-columns:minmax(0,1fr) max-content;gap:8px;padding:3px 10px;border-top:1px solid #EEF1F4;font-size:11px"><span style="font-family:'IBM Plex Mono',monospace;color:{{ c.fc }}">{{ c.n }}</span><span style="color:#536271">{{ c.t }}</span></div></sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <span style="font-size:11px;color:#536271">Blue = key. PK primary key, FK foreign key.</span>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const K = '#0071B8', N = '#14212E', X = '#8A96A3';
+    const rows = a => a.map(([col, f, t, rule], i) => ({ sn: i + 1, col, f: f || 'not imported', t: t || '', rule: rule || '', fc: f ? N : X }));
+    const tbl = (name, from, cols) => ({ name, from, cols: cols.map(([n, t]) => ({ n, t, fc: /PK|FK/.test(t) ? K : N })) });
+    return {
+      ver: '22 Oct 2026',
+      pbi: [['Semantic model', 'OSL_AF'], ['Workspace', 'OSL HQ - by topic'], ['Model owner', 'Sarfaraz KHAN'], ['Report', 'OSL monitoring (WHO African Region)'], ['Tables used', 'SupplyCombained (lines) · Shipping_Info2 (shipments)'], ['Access', 'View and export. Build permission not granted.'], ['Column names', 'Identical to the semantic model. New or renamed columns in an export are reported in the Parking Lot.']].map(([k, v]) => ({ k, v })),
+      pbiUrl: 'https://app.powerbi.com/groups/me/reports/0bee1482-e1c8-4073-bcfc-09546034c0d3',
+      registry: [
+        { ds: 'Data source 1', sys: 'Power BI · semantic model OSL_AF (workspace OSL HQ - by topic)', owner: 'Model owner: Sarfaraz KHAN', link: 'https://app.powerbi.com/groups/me/reports/0bee1482-e1c8-4073-bcfc-09546034c0d3', exports: [
+          { name: 'Request Monitoring', file: 'OSL_AF_RequestMonitoring_YYYY-MM-DD.xlsx', table: 'SupplyCombained', use: 'Order lines → orders.json lines' },
+          { name: 'Shipment Monitoring', file: 'OSL_AF_ShipmentMonitoring_YYYY-MM-DD.xlsx', table: 'Shipping_Info2', use: 'Shipments → orders.json ships' },
+          { name: 'Kit Impact (optional)', file: 'OSL_AF_KitImpact_YYYY-MM-DD.xlsx', table: 'Kit-Rate · Measures_Other', use: 'Reference for kit beneficiaries' } ] },
+        { ds: 'Data source 2', sys: 'Power BI · report EBOLA_All countries except DRC', owner: '', link: '', exports: [
+          { name: 'Line details', file: 'EBOLA_LineDetails_YYYY-MM-DD.xlsx', table: '', use: 'Cross-check of Ebola lines against Data source 1' },
+          { name: 'Shipment info', file: 'EBOLA_ShipmentInfo_YYYY-MM-DD.xlsx', table: '', use: 'Cross-check of Ebola shipments against Data source 1' },
+          { name: 'Critical items', file: 'EBOLA_CriticalItems_YYYY-MM-DD.xlsx', table: '', use: 'Compared with items flagged as essential in Data source 1' } ] },
+        { ds: 'Data source 3', sys: 'SharePoint · KENYA NAIROBI HUB · Outbound Monitoring (Excel)', owner: '', link: 'https://worldhealthorg.sharepoint.com/:x:/s/KENYANAIROBIHUB/IQC6is6PAZeuSbZLE3No0WyNAY5DAOQopCgCEofx033DUTM', exports: [
+          { name: 'Outbound Monitoring', file: 'NBO_OutboundMonitoring_YYYY-MM-DD.xlsx', table: '', use: 'Nairobi hub dispatches; compared with SHP Source NBO_SHP_OUT lines' } ] }
+      ],
+      sources: [
+        { n: 'Source 1', name: 'OSL_AF · table SupplyCombained', what: 'One row per item line of an order request or stock release: item, quantity, value, status and dates. Exported from the OSL monitoring report (Power BI).', file: 'data/orders.json → lines', cadence: 'each new export, merged without duplicates' },
+        { n: 'Source 2', name: 'OSL_AF · table Shipping_Info2', what: 'One row per WHO shipping reference: weight, volume, temperature, readiness and ETA/ATA. Exported from the OSL monitoring report (Power BI).', file: 'data/orders.json → ships', cadence: 'each new export, merged by shipping reference' },
+        { n: 'Source 3', name: 'WHO Disease Outbreak News', what: 'Confirmed cases and deaths by country, with report date and link.', file: 'data/cases.json', cadence: 'each new WHO DON publication' },
+        { n: 'Source 4', name: 'WHO technical references', what: 'Ebola treatment centre supply calculator rates, kit module contents and WHO AFRO sitrep occupancy, used by Beneficiaries & risk.', file: 'data/impact.json', cadence: 'when WHO publishes a new version' }
+      ],
+      maps: [
+        { title: 'Source 1 · OSL_AF SupplyCombained → orders.json lines', sub: 'Lines are matched on trimmed OR + trimmed item code + quantity + rounded amount. Matched lines are never overwritten; only empty dates are filled with the recorded value.', rows: rows([
+          ['Destination Country', 'c', 'ISO3', 'Country name → ISO3 code from the countries list'], ['Request Date', 'rd', 'date', 'Excel serial → YYYY-MM-DD'], ['Order Request (OR)', 'or', 'text', 'Leading/trailing spaces trimmed'], ['OPR / PO Reference', 'opr', 'text', ''], ['Origin PO reference', 'po', 'text', ''],
+          ['WHO Item code', 'code', 'text', 'Trimmed'], ['WHO Item description', 'desc', 'text', ''], ['UoM', 'uom', 'text', 'Lowercase'], ['Quantity Ordered', 'qty', 'number', ''], ['Quantity in each', 'each', 'number', 'Empty → not available'], ['Unit Goods Value (USD)', 'unit', 'number', ''], ['PO Line Amount', 'amt', 'number', 'USD'],
+          ['Requested Category', 'cat', 'text', 'PPE / IPC supplies, PPE → PPE / IPC · Logistic → Logistics · Medical equipement, Biomedical Equipment → Medical equipment · LAB… → Laboratory · empty → Uncategorised'], ['Essential Items', 'ess', 'text', ''], ['HUB/Supplier', 'hub', 'text', ''], ['Supply Type', 'type', 'text', 'Empty → Unspecified'], ['PO Creation Date/Stock request', 'poDate', 'date', ''],
+          ['WHO Shipping Reference', 'ref', 'text', 'Empty → “(no shipment) ” + OR'], ['SHP Source', 'src', 'code', 'NBO_SHP_OUT → nbo · DKR_SHP_OUT → dkr · otherwise taken from existing lines of the same OR'], ['WHO Shipping Status', 'stRaw / st', 'text / code', 'stRaw as recorded; st from the stage table below'],
+          ['Incoterm (Payable From)', 'from', 'text', ''], ['Incoterm (Payable Upto)', 'to', 'text', ''], ['Mod of Shippment', 'mode', 'text', ''], ['Transporter (3PL)', 'tpl', 'text', ''], ['Transport Document Number (AWB/BOL/RWB/TB)2', 'awb', 'text', '“0” not imported'],
+          ['Last Readiness Date', 'ready', 'date', ''], ['PO/OPR Committed readiness date', 'commit', 'date', ''], ['ETD', 'etd', 'date', ''], ['ETA', 'eta', 'date', ''], ['ATA', 'ata', 'date', ''], ['ETA2', '', '', 'Not imported: recorded on lines already Arrived or Received'],
+          ['Registration Number', 'reg', 'text', ''], ['Project', 'proj', 'text', ''], ['Task', 'task', 'text', ''], ['Award Number', 'award', 'text', ''], ['Donor Name', 'donor', 'text', ''], ['Award End Date', 'awardEnd', 'date', ''], ['PI Number', 'pi', 'text', ''],
+          ['Emergencies/Activities', 'em', 'text', '2026-G013 DRC Ituri Ebola Bundibugyo → G013; others as recorded; empty → (no emergency tag)'], ['Supply Section', 'section', 'text', 'Taken from existing lines of the same OR when the file has none'], ['Remarks Supply', 'rem', 'text', ''],
+          ['POD received?, Replenish PO or EEXB, PTEAO 1/2, Donors category, Supply Category, Report Category, Portal ID, PI Line Number, WHO Portal code, Supply Progress Status, WHO Region, Country/HUB, Arrival Week, Index', '', '', 'Not used by the dashboard'] ]) },
+        { title: 'Source 2 · OSL_AF Shipping_Info2 → orders.json ships', sub: 'Keyed by WHO Shipping Reference. Value (USD) in this export covers lines of the filtered emergency only; the dashboard sums values from the lines.', rows: rows([
+          ['WHO Shipping Reference', 'key', 'text', 'Unique key'], ['Gross Weight (Kg)', 'kg', 'number', ''], ['Volume (Cbm)', 'cbm', 'number', ''], ['Temperature Requirement', 'temp', 'text', ''], ['Number of Parcels', 'parcels', 'text', ''], ['Last Readiness Date', 'lastReady', 'date', 'Serial 0 or 1 not imported'], ['ETA/ATA', 'etaata', 'date', ''], ['Status', 'st2', 'text', 'Delivered / To be delivered, as recorded'],
+          ['Value (USD), Weight (MT), Incoterm, Mod of Shippment, Destination Country, Emergencies/Activities, WHO Shipping Status', '', '', 'Not used: held on the lines'] ]) },
+        { title: 'Sources 3 and 4 · reference files', sub: 'Entered by hand from the WHO publication, with the publication name and date stored next to each figure.', rows: rows([
+          ['DON: confirmed cases', 'cases.countries[ISO3].confirmed', 'number', 'As published'], ['DON: deaths', '….deaths', 'number', 'As published'], ['DON: report date', '….asOf', 'date', ''], ['DON: publication', '….src / ….url', 'text', ''], ['DON: remark', '….note', 'text', 'Quoted from the publication'],
+          ['ETC calculator: need per item', 'impact.fam[].pm', 'number', 'Per bed per month (need ÷ 100,000 beds ÷ 3 months)'], ['ETC calculator: Human Resources total', 'impact.staffPerBed', 'number', '÷ 100,000 beds'], ['Kit content lists', 'impact.kits[]', 'object', 'Population or patients covered per kit module, as published'] ]) }
+      ],
+      stages: [['00-Planned', 'planned'], ['01-Sourced', 'planned'], ['oo-MIssing', 'planned'], ['12-On Hold', 'planned'], ['01b-Awating Pre-leg', 'prelg'], ['01c-At transit hub', 'thub'], ['01d-Sourced (at transit hub)', 'thub'], ['02-Goods Available at hub or supplier', 'hub'], ['04-GL Requested (if needed)', 'gl'], ['06-Pending pre-alert request', 'depart'], ['07-Pending Departure', 'depart'], ['08-Shipped', 'transit'], ['09-Arrived', 'arrived'], ['09-Arrived (from transit hub)', 'arrived'], ['10-Received', 'received'], ['10-Received (from transit hub)', 'received'], ['11-Canceled', 'canceled']].map(([raw, st]) => ({ raw, st })),
+      tables: [
+        tbl('country', 'orders.json countries', [['iso', 'char(3) PK'], ['m49', 'int'], ['name', 'text']]),
+        tbl('line', 'Source 1', [['id', 'bigserial PK'], ['c', 'char(3) FK country'], ['ref', 'text FK shipment'], ['em, or, opr, po', 'text'], ['code, desc, uom', 'text'], ['qty, each', 'numeric'], ['unit, amt', 'numeric(14,2)'], ['cat, ess, hub, src, type', 'text'], ['st', 'text FK status_map'], ['stRaw', 'text'], ['rd, poDate, ready, commit, etd, eta, ata', 'date'], ['mode, tpl, awb, from, to, reg', 'text'], ['proj, task, award, donor, pi', 'text'], ['awardEnd', 'date'], ['section, rem', 'text'], ['import_id', 'int FK import_receipt']]),
+        tbl('shipment', 'Source 2', [['ref', 'text PK'], ['kg, cbm', 'numeric'], ['temp, parcels', 'text'], ['lastReady, etaata', 'date'], ['st2', 'text']]),
+        tbl('status_map', 'stage table', [['stRaw', 'text PK'], ['st', 'text']]),
+        tbl('case_report', 'Source 3', [['iso', 'char(3) PK FK country'], ['asOf', 'date PK'], ['confirmed, deaths', 'int'], ['src, url, note', 'text']]),
+        tbl('import_receipt', 'Parking Lot', [['id', 'serial PK'], ['date', 'date'], ['lines_before, lines_after', 'int'], ['value_before, value_after', 'numeric(14,2)']]),
+        tbl('import_file', 'Parking Lot', [['receipt_id', 'int FK import_receipt'], ['file, role, scope', 'text'], ['rows, matched, added, replaced', 'int'], ['file_value, ds_value', 'numeric(14,2)'], ['result, note', 'text']]),
+        tbl('import_issue', 'Parking Lot', [['id', 'serial PK'], ['date', 'date'], ['file, field, value, issue, refs', 'text'], ['rows', 'int']])
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

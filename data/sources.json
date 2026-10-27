@@ -1,0 +1,54 @@
+{
+ "folder": "SharePoint · KENYA NAIROBI-HUB › Data › OSL - Nairobi › DevOPS › OSL-Preparedness",
+ "sources": [
+  {
+   "id": "ds1-req",
+   "ds": "Data source 1 · OSL_AF",
+   "name": "Request Monitoring",
+   "role": "lines",
+   "url": "https://worldhealthorg.sharepoint.com/:x:/s/KENYANAIROBIHUB/IQAsfKARktNMQrDfXgw2ZPysART8F7wkIdhZX-OpUiqGkp0"
+  },
+  {
+   "id": "ds1-shp",
+   "ds": "Data source 1 · OSL_AF",
+   "name": "Shipment Monitoring",
+   "role": "ships",
+   "url": "https://worldhealthorg.sharepoint.com/:x:/s/KENYANAIROBIHUB/IQB1SdYdM9lDQYi2D1tSNqwsAa_8fGdz3tcUAH7rMxu0w2A"
+  },
+  {
+   "id": "ds1-kit",
+   "ds": "Data source 1 · OSL_AF",
+   "name": "Kit Impact",
+   "role": "kits",
+   "url": "https://worldhealthorg.sharepoint.com/:x:/s/KENYANAIROBIHUB/IQBzBG8Wq24LRodH5t0ioFSgAXRmfGpOyqvvUUbUvnNBhVU"
+  },
+  {
+   "id": "ds2-line",
+   "ds": "Data source 2 · EBOLA_All countries except DRC",
+   "name": "Line details",
+   "role": "lines",
+   "url": "https://worldhealthorg.sharepoint.com/:x:/s/KENYANAIROBIHUB/IQCuVQiJzAb4RJRm5iI8P4wtAfMALbLuxsHyeWXb6sX9kcw"
+  },
+  {
+   "id": "ds2-shp",
+   "ds": "Data source 2 · EBOLA_All countries except DRC",
+   "name": "Shipment info",
+   "role": "ships",
+   "url": "https://worldhealthorg.sharepoint.com/:x:/s/KENYANAIROBIHUB/IQBKIPKgYGGCSo9NqdZOo9tdATWm7y3tSXQuN8c7dNFeE1I"
+  },
+  {
+   "id": "ds2-crit",
+   "ds": "Data source 2 · EBOLA_All countries except DRC",
+   "name": "Critical items",
+   "role": "critical",
+   "url": "https://worldhealthorg.sharepoint.com/:x:/s/KENYANAIROBIHUB/IQAkAZkwLwr6S7cRhGKEdGgyAWIrjr3kHnDCw8sSoe1WZoM"
+  },
+  {
+   "id": "ds3-nbo",
+   "ds": "Data source 3 · KENYA NAIROBI HUB",
+   "name": "Outbound Monitoring",
+   "role": "outbound",
+   "url": "https://worldhealthorg.sharepoint.com/:x:/s/KENYANAIROBIHUB/IQC6is6PAZeuSbZLE3No0WyNAS1q5VCJFVO27hotEKOm70c"
+  }
+ ]
+}
